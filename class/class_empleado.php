@@ -138,6 +138,30 @@ class Empleado
 	    $this->fechaExamen = $fechaExamen;
 	}
 
+	public static function eliminarEmpleado($link, $dni) {
+		$sql = "DELETE FROM empleado WHERE `dni` = $dni";
+		$resultado = $link->ejecutarInstruccion($sql);
+		if ($resultado) {
+			$link->liberarResultado($resultado);
+		}
+	}
+
+	public static function generarEmpleado($link) {
+		$sql = "SELECT `dni`, `afiliacion`, `nombre`, `username`, `pass`, `isAdmin`, `tipo` FROM `empleado`";
+		if($resultado = $link->ejecutarInstruccion($sql)) {
+			while ($fila = $link->obtenerFila($resultado)) {
+				echo "<tr>";
+                echo "<td><input type='radio' name='rad-empleados' value='".$fila["dni"]."'></td>";
+                echo "<td>".$fila["dni"]."</td>";
+                echo "<td>".$fila["afiliacion"]."</td>";
+                echo "<td>".$fila["tipo"]."</td>";
+                echo "<td>".$fila["nombre"]."</td>";
+                echo "<td>".$fila["username"]."</td>";
+			}
+		$link->liberarResultado($resultado);
+		}
+	}
+
 	public static function obtenerLlavePrimaria($link) {
 		// obtener la llave primaria max y retornar la siguiente
 		$sql = "SELECT MAX(dni) AS 'llave_max' FROM empleado";
@@ -223,6 +247,34 @@ class Empleado
 			stripslashes($this->direccion),
 			stripslashes($this->telefono),
 			stripslashes($this->sueldo)
+		);
+		$bool1=$link->ejecutarInstruccion($sql);
+		$bool2=$link->ejecutarInstruccion($sql2);
+		if ($bool1&&$bool2) {
+			echo 'worked';
+		} else {
+			echo 'Didnt work';
+		}
+				
+	}
+
+	public function agregarControladorAereo($link)
+    {
+		// si es una cadena: '%s'
+		// si no es una cadena: %s
+		// quitar url_imagen de la bd
+		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);",
+            stripslashes($this->dni),
+            stripslashes($this->afiliacion),
+            stripslashes($this->nombre),
+            stripslashes($this->username),
+            stripslashes($this->pass),
+			stripslashes($this->isAdmin),
+			stripslashes($this->tipo)
+		);
+		$sql2 = sprintf("INSERT INTO controlador_aereo VALUES (%s, '%s');",
+			stripslashes($this->dni),
+			stripslashes($this->fechaExamen)
 		);
 		$bool1=$link->ejecutarInstruccion($sql);
 		$bool2=$link->ejecutarInstruccion($sql2);

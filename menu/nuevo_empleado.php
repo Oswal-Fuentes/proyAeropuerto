@@ -97,6 +97,18 @@ $link = new Conexion();
                        <b>Nuevo Empleado</b>
                     </div>
                     <div class="panel-body">
+                    <!-- <div class="form-group" id="div-txt-tipo-empleado">
+                            <label class="control-label" for="txt-tipo-empleado">Tipo de Empleado:</label>
+                            <input type="password" class="form-control" id="txt-tipo-empleado">
+                        </div> -->
+                        <div class="form-group" id="div-slc-tipo-empleado">
+                            <label class="control-label" for="slc-tipo-empleado">Tipo de Empleado:</label>
+                            <select class="form-control" id="slc-tipo-empleado">
+                                <option value="0"></option>
+                                <option value="1">Tecnico</option>
+                                <option value="2">Controlador aereo</option>
+                            </select>
+                        </div>
                         <div class="form-group" id="div-txt-nombre-empleado" >
                           <label class="control-label" for="txt-nombre-empleado">Nombre:</label>
                           <input type="text" class="form-control" id="txt-nombre-empleado">
@@ -118,21 +130,21 @@ $link = new Conexion();
                             <label class="control-label" for="txt-verificar-clave-empleado">Verificar su clave:</label>
                             <input type="password" class="form-control" id="txt-verificar-clave-empleado">
                         </div>
-                        <div class="form-group" id="div-txt-tipo-empleado">
-                            <label class="control-label" for="txt-tipo-empleado">Tipo de Empleado:</label>
-                            <input type="password" class="form-control" id="txt-tipo-empleado">
-                        </div>
-                        <div class="form-group" id="div-txt-tipo-empleado">
-                            <label class="control-label" for="txt-tipo-empleado">Dirección:</label>
+                        <div class="form-group" id="div-txt-direccion-empleado">
+                            <label class="control-label" for="txt-direccion-empleado">Dirección:</label>
                             <input type="text" class="form-control" id="txt-direccion-empleado">
                         </div>
-                        <div class="form-group" id="div-txt-tipo-empleado">
-                            <label class="control-label" for="txt-tipo-empleado">Teléfono:</label>
+                        <div class="form-group" id="div-txt-telefono-empleado">
+                            <label class="control-label" for="txt-telefono-empleado">Teléfono:</label>
                             <input type="text" class="form-control" id="txt-telefono-empleado">
                         </div>
-                        <div class="form-group" id="div-txt-tipo-empleado">
-                            <label class="control-label" for="txt-tipo-empleado">Sueldo:</label>
+                        <div class="form-group" id="div-txt-sueldo-empleado">
+                            <label class="control-label" for="txt-sueldo-empleado">Sueldo:</label>
                             <input type="text" class="form-control" id="txt-sueldo-empleado">
+                        </div>
+                        <div class="form-group" id="div-txt-fechaExamen-empleado">
+                            <label class="control-label" for="txt-fechaExamen-empleado">Fecha Examen:</label>
+                            <input type="date" class="form-control" id="txt-fechaExamen-empleado">
                         </div>
                     </div>
                     <div class="panel-footer">

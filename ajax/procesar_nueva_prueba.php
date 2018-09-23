@@ -42,7 +42,6 @@ switch ($_GET["accion"])
             $prueba = new Prueba(
                 $_POST["txt-numeroPrueba-Pruebas"],
                 null,
-
                 $_POST["txt-numeroRegistro-Pruebas"],
                 $_POST["txt-nombre-Pruebas"],
                 $_POST["txt-puntuacion-Pruebas"],

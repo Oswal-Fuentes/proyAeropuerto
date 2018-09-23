@@ -2,7 +2,6 @@
 
 class Pruebas{
 
-   calificacion
 	private $numeroPrueba;
 	private $numeroRegistro;
 	private $dni;

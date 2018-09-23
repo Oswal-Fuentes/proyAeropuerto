@@ -1,7 +1,7 @@
 var campos = 
 [
-    "txt-numeroPrueba-Pruebas",
-    "txt-numeroRegistro-Pruebas", 
+    "txt-numero-prueba",
+    "txt-dni-prueba", 
     "txt-nombre-Pruebas",
     "txt-puntuacion-Pruebas",
     "txt-fecha-Pruebas",

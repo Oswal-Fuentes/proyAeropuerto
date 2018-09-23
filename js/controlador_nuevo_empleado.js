@@ -9,7 +9,9 @@ var campos =
     "txt-tipo-empleado",
     "txt-direccion-empleado",
     "txt-telefono-empleado",
-    "txt-sueldo-empleado"
+    "txt-sueldo-empleado",
+    "txt-fechaExamen-empleado",
+    "slc-tipo-empleado"
 ];
 
 actualizarTabla = function()
@@ -45,7 +47,7 @@ agregarDatos = function(objeto)
     $("#txt-direccion-empleado").val(objeto.direccion);
     $("#txt-telefono-empleado").val(objeto.telefono);
     $("#txt-sueldo-empleado").val(objeto.sueldo);
-
+    $("#txt-fechaExamen-empleado").val(objeto.fechaExamen);
 };
 
 modificarEmpleado = function(parametros)
@@ -71,7 +73,7 @@ modificarEmpleado = function(parametros)
 radioChecked = function()
 {
     // obtener el valor del radio button que esta con un check
-    return $("input[name='rad-empleado']:checked").val();
+    return $("input[name='rad-empleados']:checked").val();
 };
 
 // solo entrar a esta parte cuando el documento este listo:
@@ -79,6 +81,36 @@ $(document).ready(function()
 {
     // actualizar tabla con los valores en la bd
     actualizarTabla();
+    $("#div-txt-fechaExamen-empleado").addClass("hidden");
+    $("#div-txt-direccion-empleado").addClass("hidden");
+    $("#div-txt-telefono-empleado").addClass("hidden");
+    $("#div-txt-sueldo-empleado").addClass("hidden");
+
+    $("#slc-tipo-empleado").change(function() {
+        let seleccionado = $("#slc-tipo-empleado").val();
+        if (seleccionado === '1') {
+            // es tecnico
+            // Esconde: fecha, muestra los demas
+            $("#div-txt-fechaExamen-empleado").addClass("hidden");
+            $("#div-txt-direccion-empleado").removeClass("hidden");
+            $("#div-txt-telefono-empleado").removeClass("hidden");
+            $("#div-txt-sueldo-empleado").removeClass("hidden");
+            
+        } else if (seleccionado === '2') {
+            // es controlador
+            // Esconde: direccion, telefono y sueldo, muestra los demas
+            $("#div-txt-fechaExamen-empleado").removeClass("hidden");
+            $("#div-txt-direccion-empleado").addClass("hidden");
+            $("#div-txt-telefono-empleado").addClass("hidden");
+            $("#div-txt-sueldo-empleado").addClass("hidden");
+        } else {
+            // no ha seleccionado ninguno, esconder todos:
+            $("#div-txt-fechaExamen-empleado").addClass("hidden");
+            $("#div-txt-direccion-empleado").addClass("hidden");
+            $("#div-txt-telefono-empleado").addClass("hidden");
+            $("#div-txt-sueldo-empleado").addClass("hidden");
+        }
+    });
 
     $("#btn-nuevo-empleado-cancelar").click(function(){
         limpiarCampos(campos);
@@ -98,7 +130,7 @@ $(document).ready(function()
                 {
                     console.log(texto)
                     //actualizarTabla();
-                    //limpiarCampos(campos);
+                    limpiarCampos(campos);
                 },
                 error: function(error)
                 {
@@ -109,6 +141,7 @@ $(document).ready(function()
     });
 
     $("#btn-nuevo-empleado-eliminar").click(function(){
+        console.log(radioChecked());
         if(radioChecked())
         {
             var parametros = "dni=" + radioChecked();

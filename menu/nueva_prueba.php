@@ -97,20 +97,21 @@ $link = new Conexion();
                        <b>Nueva Prueba</b>
                     </div>
                     <div class="panel-body">
-                        <div class="form-group" id="div-txt-numeroPrueba-Pruebas" >
-                          <label class="control-label" for="numeroPrueba-Pruebas">Numero de Prueba:</label>
-                          <input type="text" class="form-control" id="txt-numeroPrueba-Pruebas">
-                          <input type="hidden" class="form-control" id="txt-numeroPrueba-Pruebas" value="">
+                        <div class="form-group" id="div-txt-numero-prueba" >
+                          <label class="control-label" for="txt-numero-prueba">Numero de Prueba:</label>
+                          <input type="text" class="form-control" id="txt-numero-prueba">
+                          <input type="hidden" class="form-control" id="txt-numero-prueba" value="">
                         </div>
-                        <div class="form-group" id="div-txt-dni-Pruebas" >
-                          <label class="control-label" for="txt-dni-Pruebas">Numero de registro:</label>
-                          <input type="text" class="form-control" id="txt-dni-Pruebas">
+                        <div class="form-group" id="div-txt-num-registro-prueba" >
+                          <label class="control-label" for="txt-num-registro-prueba">Numero de registro:</label>
+                          <input type="text" class="form-control" id="txt-num-registro-prueba">
                         </div>
-                        <div class="form-group" id="div-txt-dni-Pruebas" >
-                          <label class="control-label" for="txt-dni-Pruebas">DNI:</label>
-                          <input type="text" class="form-control" id="txt-dni-Pruebas">
+                        <div class="form-group" id="div-txt-dni-prueba">
+                          <label class="control-label" for="txt-dni-prueba">DNI:</label>
+                          <input type="text" class="form-control" id="txt-dni-prueba">
                         </div>
-                        <div class="form-group" id="div-txt-nombre-Pruebas" >
+                        <!-- ttiene que arreglar todos estos ids: -->
+                        <div class="form-group" id="div-txt-nombre-Pruebas">
                           <label class="control-label" for="txt-nombre-Pruebas">Nombre Empleado:</label>
                           <input type="text" class="form-control" id="txt-nombre-Pruebas">
                         </div>
