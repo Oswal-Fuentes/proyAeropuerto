@@ -11,7 +11,7 @@ $link = new Conexion();
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="description" content="" />
     <meta name="author" content="" />
@@ -121,6 +121,18 @@ $link = new Conexion();
                         <div class="form-group" id="div-txt-tipo-empleado">
                             <label class="control-label" for="txt-tipo-empleado">Tipo de Empleado:</label>
                             <input type="password" class="form-control" id="txt-tipo-empleado">
+                        </div>
+                        <div class="form-group" id="div-txt-tipo-empleado">
+                            <label class="control-label" for="txt-tipo-empleado">Dirección:</label>
+                            <input type="text" class="form-control" id="txt-direccion-empleado">
+                        </div>
+                        <div class="form-group" id="div-txt-tipo-empleado">
+                            <label class="control-label" for="txt-tipo-empleado">Teléfono:</label>
+                            <input type="text" class="form-control" id="txt-telefono-empleado">
+                        </div>
+                        <div class="form-group" id="div-txt-tipo-empleado">
+                            <label class="control-label" for="txt-tipo-empleado">Sueldo:</label>
+                            <input type="text" class="form-control" id="txt-sueldo-empleado">
                         </div>
                     </div>
                     <div class="panel-footer">

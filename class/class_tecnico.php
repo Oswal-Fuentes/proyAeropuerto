@@ -6,7 +6,7 @@ class Tecnico
     private $dni; 
     private $direccion; 
     private $telefono; 
-    private $sueldo;  
+    private $sueldo;
 
     function __construct($dni, $direccion, $telefono, $sueldo)
     {

@@ -17,11 +17,27 @@ switch ($_GET["accion"])
             $_POST["txt-username-empleado"],
             $_POST["txt-clave-empleado"],
             0,
-            $_POST["txt-tipo-empleado"]
+            $_POST["txt-tipo-empleado"]     
         );
         echo $empleado->agregarEmpleado($link);
         break;
-        
+    case 'agregarTecnico':
+        $llave_primaria = Empleado::obtenerLlavePrimaria($link);
+        $empleado = new Empleado(
+            $llave_primaria,
+            $_POST["txt-afiliacion-empleado"]
+            $_POST["txt-nombre-empleado"],
+            $_POST["txt-username-empleado"],
+            $_POST["txt-clave-empleado"],
+            0,
+            $_POST["txt-tipo-empleado"],
+            $_POST["txt-direccion-empleado"],
+            $_POST["txt-telefono-empleado"],
+            $_POST["txt-sueldo-empleado"],
+            0
+        );
+        echo $empleado->agregarTecnico($link);
+        break;
     case 'generarTabla':
         echo Empleado::generarEmpleado($link);
         break;

@@ -7,6 +7,9 @@ var campos =
     "txt-clave-empleado",
     "txt-verificar-clave-empleado",
     "txt-tipo-empleado",
+    "txt-direccion-empleado",
+    "txt-telefono-empleado",
+    "txt-sueldo-empleado"
 ];
 
 actualizarTabla = function()
@@ -39,6 +42,10 @@ agregarDatos = function(objeto)
     $("#txt-clave-empleado").val(objeto.clave);
     $("#txt-isAdmin-empleado").val(objeto.isAdmin);
     $("#txt-tipo-empleado").val(objeto.tipo);
+    $("#txt-direccion-empleado").val(objeto.direccion);
+    $("#txt-telefono-empleado").val(objeto.telefono);
+    $("#txt-sueldo-empleado").val(objeto.sueldo);
+
 };
 
 modificarEmpleado = function(parametros)
@@ -83,15 +90,15 @@ $(document).ready(function()
         {
             var parametros = procesarParametros(campos);
             $.ajax({
-                url: "../ajax/procesar_nuevo_empleado.php?accion=guardarEmpleado",
+                url: "../ajax/procesar_nuevo_empleado.php?accion=agregarTecnico",
                 method: "POST",
                 data: parametros,
                 dataType: "html",
                 success: function(texto)
                 {
                     console.log(texto)
-                    actualizarTabla();
-                    limpiarCampos(campos);
+                    //actualizarTabla();
+                    //limpiarCampos(campos);
                 },
                 error: function(error)
                 {

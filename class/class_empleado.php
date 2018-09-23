@@ -8,8 +8,12 @@ class Empleado
 	private $pass;
 	private $isAdmin;
 	private $tipo;
+	private $direccion;
+	private $telefono;
+	private $sueldo;
+	private $fechaExamen;
 
-	function __construct($dni, $afiliacion, $nombre, $username, $pass, $isAdmin, $tipo)
+	function __construct($dni, $afiliacion, $nombre, $username, $pass, $isAdmin, $tipo, $direccion, $telefono, $sueldo, $fechaExamen)
 	{
 		$this->dni = $dni;
 		$this->afiliacion = $afiliacion;
@@ -18,6 +22,10 @@ class Empleado
 		$this->pass = $pass;
 		$this->isAdmin = $isAdmin;
 		$this->tipo = $tipo;
+		$this->direccion = $direccion;
+		$this->telefono = $telefono;
+		$this->sueldo = $sueldo;
+		$this->fechaExamen = $fechaExamen;
 	}
 
 	public function getDni()
@@ -90,6 +98,46 @@ class Empleado
 	    $this->tipo = $tipo;
 	}
 
+	public function getdireccion()
+	{
+	    return $direccion->direccion;
+	}
+
+	public function setdireccion($direccion)
+	{
+	    $this->direccion = $direccion;
+	}
+
+	public function gettelefono()
+	{
+	    return $telefono->telefono;
+	}
+
+	public function settelefono($telefono)
+	{
+	    $this->telefono = $telefono;
+	}
+
+	public function getsueldo()
+	{
+	    return $sueldo->sueldo;
+	}
+
+	public function setsueldo($sueldo)
+	{
+	    $this->sueldo = $sueldo;
+	}
+
+	public function getfechaExamen()
+	{
+	    return $fechaExamen->fechaExamen;
+	}
+
+	public function setfechaExamen($fechaExamen)
+	{
+	    $this->fechaExamen = $fechaExamen;
+	}
+
 	public static function obtenerLlavePrimaria($link) {
 		// obtener la llave primaria max y retornar la siguiente
 		$sql = "SELECT MAX(dni) AS 'llave_max' FROM empleado";
@@ -156,6 +204,31 @@ class Empleado
             echo "Error! No se agrego el Empleado.";
 	}
 	
+	public function agregarTecnico($link)
+    {
+		// si es una cadena: '%s'
+		// si no es una cadena: %s
+		// quitar url_imagen de la bd
+		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);
+						INSERT INTO tecnicos VALUES (%s,'%s','%s',%s);",
+            stripslashes($this->dni),
+            stripslashes($this->afiliacion),
+            stripslashes($this->nombre),
+            stripslashes($this->username),
+            stripslashes($this->pass),
+			stripslashes($this->isAdmin),
+			stripslashes($this->tipo),
+			stripslashes($this->dni),
+			stripslashes($this->direccion),
+			stripslashes($this->telefono),
+			stripslashes($this->sueldo)
+		);
+        if($link->ejecutarInstruccion($sql))
+            echo "Empleado agregado con exito!";
+        else
+            echo "Error! No se agrego el Empleado.";
+	}
+
 	public function modificarEstudiante($link)
     {
         $sql = sprintf("
