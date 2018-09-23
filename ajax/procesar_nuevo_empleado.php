@@ -25,7 +25,7 @@ switch ($_GET["accion"])
         $llave_primaria = Empleado::obtenerLlavePrimaria($link);
         $empleado = new Empleado(
             $llave_primaria,
-            $_POST["txt-afiliacion-empleado"]
+            $_POST["txt-afiliacion-empleado"],
             $_POST["txt-nombre-empleado"],
             $_POST["txt-username-empleado"],
             $_POST["txt-clave-empleado"],

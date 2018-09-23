@@ -46,7 +46,6 @@ class Avion
 
     public function agregarAvion($link)
     {
-        echo "holis";
         $sql = sprintf("INSERT INTO aviones VALUES (%s, %s);",
             stripslashes($this->numeroRegistro),
             stripslashes($this->numeroModelo)

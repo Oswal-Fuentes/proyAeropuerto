@@ -209,24 +209,29 @@ class Empleado
 		// si es una cadena: '%s'
 		// si no es una cadena: %s
 		// quitar url_imagen de la bd
-		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);
-						INSERT INTO tecnicos VALUES (%s,'%s','%s',%s);",
+		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);",
             stripslashes($this->dni),
             stripslashes($this->afiliacion),
             stripslashes($this->nombre),
             stripslashes($this->username),
             stripslashes($this->pass),
 			stripslashes($this->isAdmin),
-			stripslashes($this->tipo),
+			stripslashes($this->tipo)
+		);
+		$sql2 = sprintf("INSERT INTO tecnicos VALUES (%s,'%s','%s',%s);",
 			stripslashes($this->dni),
 			stripslashes($this->direccion),
 			stripslashes($this->telefono),
 			stripslashes($this->sueldo)
 		);
-        if($link->ejecutarInstruccion($sql))
-            echo "Empleado agregado con exito!";
-        else
-            echo "Error! No se agrego el Empleado.";
+		$bool1=$link->ejecutarInstruccion($sql);
+		$bool2=$link->ejecutarInstruccion($sql2);
+		if ($bool1&&$bool2) {
+			echo 'worked';
+		} else {
+			echo 'Didnt work';
+		}
+				
 	}
 
 	public function modificarEstudiante($link)
