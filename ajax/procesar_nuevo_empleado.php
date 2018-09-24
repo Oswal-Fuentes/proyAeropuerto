@@ -6,21 +6,19 @@ $link = new Conexion();
 
 switch ($_GET["accion"])
 {
-    case 'guardarEmpleado':
-        $llave_primaria = Empleado::obtenerLlavePrimaria($link);
-
-        // hacemos un nuevo empleado con los valores que tiene el empleado en la bd
-        $empleado = new Empleado(
-            $llave_primaria,
-            $_POST["txt-afiliacion-empleado"],
-            $_POST["txt-nombre-empleado"],
-            $_POST["txt-username-empleado"],
-            $_POST["txt-clave-empleado"],
-            0,
-            $_POST["txt-tipo-empleado"]     
-        );
-        echo $empleado->agregarEmpleado($link);
-        break;
+    // case 'guardarEmpleado':
+    //     $llave_primaria = Empleado::obtenerLlavePrimaria($link);
+    //     $empleado = new Empleado(
+    //         $llave_primaria,
+    //         $_POST["txt-afiliacion-empleado"],
+    //         $_POST["txt-nombre-empleado"],
+    //         $_POST["txt-username-empleado"],
+    //         $_POST["txt-clave-empleado"],
+    //         0,
+    //         $_POST["txt-tipo-empleado"]     
+    //     );
+    //     echo $empleado->agregarEmpleado($link);
+    //     break;
         
     case 'agregarTecnico':
         $llave_primaria = Empleado::obtenerLlavePrimaria($link);
@@ -31,7 +29,7 @@ switch ($_GET["accion"])
             $_POST["txt-username-empleado"],
             $_POST["txt-clave-empleado"],
             0,
-            $_POST["txt-tipo-empleado"],
+            1,
             $_POST["txt-direccion-empleado"],
             $_POST["txt-telefono-empleado"],
             $_POST["txt-sueldo-empleado"],
@@ -41,6 +39,7 @@ switch ($_GET["accion"])
         break;
 
     case 'agregarControladorAereo':
+        // yo creo que este no funciona:
         $llave_primaria = Empleado::obtenerLlavePrimaria($link);
         $empleado = new Empleado(
             $llave_primaria,
@@ -61,6 +60,7 @@ switch ($_GET["accion"])
         break;
 
     case 'eliminarEmpleado':
+        // este solo puede eliminar empleados no tecnicos ni controladores
         Empleado::eliminarEmpleado($link, $_POST["dni"]);
         break;
 

@@ -1,6 +1,6 @@
 <?php
 
-class Pruebas{
+class Prueba{
 
 	private $numeroPrueba;
 	private $numeroRegistro;
@@ -36,12 +36,8 @@ class Pruebas{
      
     public function setNumeroRegistro(){
 	    $this->numeroRegistro = $numeroRegistro;
-    }
-    
-	public function setCodigoTipoSeccion($numeroRegistro){
-	    $this->numeroRegistro = $numeroRegistro;
 	}
-	
+
 	public function getDni(){
 	    return $this->dni;
 	}
@@ -90,6 +86,7 @@ class Pruebas{
 	    $this->calificacion = $calificacion;
 	}
 
+	/*
 	public static function eliminarSeccion($link, $numeroPrueba){
 		$sql = sprintf("
 			DELETE FROM tbl_secciones_x_usuarios
@@ -106,6 +103,37 @@ class Pruebas{
 		);
 
 		$link->ejecutarInstruccion($sql);
+	}
+	*/
+	public function agregarPrueba($link)
+    {
+		// si es una cadena: '%s'
+		// si no es una cadena: %s
+		// quitar url_imagen de la bd
+        $sql = "INSERT INTO pruebas VALUES
+		(NULL, $this->numeroRegistro, $this->dni,
+		'$this->nombre', $this->puntuacion,
+		'$this->fecha', $this->horas, $this->calificacion);";
+        if($link->ejecutarInstruccion($sql))
+            echo "Prueba agregada con exito!";
+        else {
+			// no se agrega porque tienen como que el dni es una llave foranea de tecnicos, no de empleados
+			// esta bueno asi? si entran con un tecnico se puede agregar
+			echo "Error! No se agrego la Prueba.";
+			echo $sql;
+		}
+	}
+
+	public static function obtenerLlavePrimaria($link) {
+		$sql = "SELECT MAX(numeroPrueba) AS 'llave_max' FROM pruebas";
+		$resultado = $link->ejecutarInstruccion($sql);
+		if ($link->cantidadRegistros($resultado) > 0)
+        {
+			$fila = $link->obtenerFila($resultado);
+			return $fila["llave_max"] + 1;
+        } else {
+			return 0;
+		}
 	}
 
 	public static function verificarIntegridad($link, $fecha, $horas, $nombre){

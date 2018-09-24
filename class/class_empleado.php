@@ -138,6 +138,16 @@ class Empleado
 	    $this->fechaExamen = $fechaExamen;
 	}
 
+	public static function obtenerEmpleado($link, $dni) {
+		$sql = "SELECT `dni`, `afiliacion`, `nombre`, `username`, `pass`, `isAdmin`, `tipo` FROM `empleado` WHERE `dni` = $dni";
+		if ($link->cantidadRegistros($resultado) > 0) {
+			$fila = $link->obtenerFila($resultado);
+			return $fila;
+        } else {
+			return false;
+		}
+	}
+
 	public static function eliminarEmpleado($link, $dni) {
 		$sql = "DELETE FROM empleado WHERE `dni` = $dni";
 		$resultado = $link->ejecutarInstruccion($sql);

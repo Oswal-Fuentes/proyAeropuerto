@@ -57,8 +57,8 @@ class Menu
                 echo "<li><a href='nuevo_controlador_aereo.php' class=\"menu-top-active\">Nuevo controlador aereo</a></li>";
                 echo "<li><a href='nuevo_avion.php' class=\"menu-top-active\">Nuevo avion</a></li>";
             } else {
-                echo "<li><a href='nuevo_prueba.php' class=\"menu-top-active\">Nuevo prueba</a></li>";
-                echo "<li><a href='mostrar_aviones.php' class=\"menu-top-active\">Mostrar aviones</a></li>";
+                echo "<li><a href='nueva_prueba.php' class=\"menu-top-active\">Nuevo prueba</a></li>";
+                echo "<li><a href='nuevo_avion.php' class=\"menu-top-active\">Mostrar aviones</a></li>";
             }
         }
         $link->liberarResultado($resultado);

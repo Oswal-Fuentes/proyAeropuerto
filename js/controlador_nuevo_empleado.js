@@ -87,8 +87,7 @@ $(document).ready(function()
     $("#div-txt-sueldo-empleado").addClass("hidden");
 
     $("#slc-tipo-empleado").change(function() {
-        let seleccionado = $("#slc-tipo-empleado").val();
-        if (seleccionado === '1') {
+        if ($("#slc-tipo-empleado").val() === '1') {
             // es tecnico
             // Esconde: fecha, muestra los demas
             $("#div-txt-fechaExamen-empleado").addClass("hidden");
@@ -96,7 +95,7 @@ $(document).ready(function()
             $("#div-txt-telefono-empleado").removeClass("hidden");
             $("#div-txt-sueldo-empleado").removeClass("hidden");
             
-        } else if (seleccionado === '2') {
+        } else if ($("#slc-tipo-empleado").val() === '2') {
             // es controlador
             // Esconde: direccion, telefono y sueldo, muestra los demas
             $("#div-txt-fechaExamen-empleado").removeClass("hidden");
@@ -117,10 +116,30 @@ $(document).ready(function()
     });
 
     $("#btn-nuevo-empleado-guardar").click(function(){
-        // guardar empleado
-        if(verificarCampos(campos) && verificarClave())
+        // verificar campos para tecnico, no se toma en cuenta: direccion, telefono ni sueldo
+        let camposTecnico = [
+            'txt-direccion-empleado', 
+            'txt-telefono-empleado', 
+            'txt-sueldo-empleado',
+            'txt-afiliacion-empleado', 
+            'txt-nombre-empleado', 
+            'txt-username-empleado',
+            'txt-clave-empleado',
+            'txt-verificar-clave-empleado'
+        ];
+        // verificar campos para controlador, no se toma en cuenta: fecha de examen
+        let camposControlador = [
+            'txt-fechaExamen-empleado', 
+            'txt-afiliacion-empleado', 
+            'txt-nombre-empleado', 
+            'txt-username-empleado',
+            'txt-clave-empleado',
+            'txt-verificar-clave-empleado'
+        ];
+
+        if ($("#slc-tipo-empleado").val() === '1' && verificarCampos(camposTecnico) && verificarClave())
         {
-            var parametros = procesarParametros(campos);
+            var parametros = procesarParametros(camposTecnico);
             $.ajax({
                 url: "../ajax/procesar_nuevo_empleado.php?accion=agregarTecnico",
                 method: "POST",
@@ -129,7 +148,25 @@ $(document).ready(function()
                 success: function(texto)
                 {
                     console.log(texto)
-                    //actualizarTabla();
+                    actualizarTabla();
+                    limpiarCampos(campos);
+                },
+                error: function(error)
+                {
+                    console.log(error)
+                }
+            });
+        } else if ($("#slc-tipo-empleado").val() === '2' && verificarCampos(camposControlador) && verificarClave()) {
+            var parametros = procesarParametros(camposControlador);
+            $.ajax({
+                url: "../ajax/procesar_nuevo_empleado.php?accion=agregarTecnico",
+                method: "POST",
+                data: parametros,
+                dataType: "html",
+                success: function(texto)
+                {
+                    console.log(texto)
+                    actualizarTabla();
                     limpiarCampos(campos);
                 },
                 error: function(error)
@@ -138,6 +175,8 @@ $(document).ready(function()
                 }
             });
         }
+
+        
     });
 
     $("#btn-nuevo-empleado-eliminar").click(function(){

@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 include_once("../class/class_conexion.php");
 include_once("../class/class_pruebas.php");
 
@@ -6,48 +6,47 @@ $link = new Conexion();
 
 switch ($_GET["accion"])
 {
-    case 'guardarPrueba':
+    case 'agregarPrueba':
         $llave_primaria = Prueba::obtenerLlavePrimaria($link);
-
-        // hacemos un nuevo empleado con los valores que tiene el empleado en la bd
+        // hacemos una nueva prueba con los valores que tiene la prueba en la bd
         $prueba = new Prueba(
             $llave_primaria,
-            $_POST["txt-numeroPrueba-Pruebas"],
-            $_POST["txt-numeroRegistro-Pruebas"],
-            $_POST["txt-nombre-Pruebas"],
-            $_POST["txt-puntuacion-Pruebas"],
-            $_POST["txt-fecha-Pruebas"],
-            $_POST["txt-horas-Pruebas"],
-            $_POST["txt-calificacion-Pruebas"],
-            0
+            //$_POST["txt-numero-prueba"],
+            $_POST["txt-numeroRegistro-prueba"],
+            $_SESSION["dni"],
+            $_POST["txt-nombre-prueba"],
+            $_POST["txt-puntuacion-prueba"],
+            $_POST["txt-fecha-prueba"],
+            $_POST["txt-horas-prueba"],
+            $_POST["txt-calificacion-prueba"]
         );
-        echo $empleado->agregarPrueba($link);
+        echo $prueba->agregarPrueba($link);
         break;
 
     case 'generarTabla':
         echo Prueba::generarPrueba($link);
         break;
 
-    case 'eliminarPrueba':
-        Prueba::eliminarPrueba($link, $_POST["numeroPrueba"]);
-        break;
+    //case 'eliminarPrueba':
+     //   Prueba::eliminarPrueba($link, $_POST["numeroPrueba"]);
+     //   break;
 
     case 'obtenerPrueba':
-        echo json_encode(Prueba::obtenerEmpleado($link, $_POST["dni"]));
+        echo json_encode(Prueba::obtenerPrueba($link, $_POST["numero-prueba"]));
         break;
 
     case 'modificarPrueba':
-        if(Prueba::verificarModificar($link, $_POST["txt-numeroPrueba-Pruebas"]
+        if(Prueba::verificarModificar($link, $_POST["txt-numero-prueba"]))
         {
             $prueba = new Prueba(
-                $_POST["txt-numeroPrueba-Pruebas"],
-                null,
-                $_POST["txt-numeroRegistro-Pruebas"],
-                $_POST["txt-nombre-Pruebas"],
-                $_POST["txt-puntuacion-Pruebas"],
-                $_POST["txt-fecha-Pruebas"],
-                $_POST["txt-horas-Pruebas"],
-                $_POST["txt-calificacion-Pruebas"],
+                $_POST["txt-numero-prueba"],
+                $_POST["txt-numeroRegistro-prueba"],
+                $_POST["txt-dni-prueba"],
+                $_POST["txt-nombre-prueba"],
+                $_POST["txt-puntuacion-prueba"],
+                $_POST["txt-fecha-prueba"],
+                $_POST["txt-horas-prueba"],
+                $_POST["txt-calificacion-prueba"]
             );
             echo $empleado->modificarEmpleado($link);
         }
