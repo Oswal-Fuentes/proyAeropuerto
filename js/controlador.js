@@ -61,6 +61,7 @@ $(document).ready(function()
         dataType: "html",
         success: function(html)
         {
+            console.log(html);
             $("#div-user-settings").html(html);
         }
     });

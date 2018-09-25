@@ -240,10 +240,7 @@ class Empleado
 	
 	public function agregarTecnico($link)
     {
-		// si es una cadena: '%s'
-		// si no es una cadena: %s
-		// quitar url_imagen de la bd
-		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);",
+		$sql = sprintf("CALL insertar_empleado (%s, %s, '%s', '%s', '%s', %s, %s);",
             stripslashes($this->dni),
             stripslashes($this->afiliacion),
             stripslashes($this->nombre),
@@ -252,7 +249,7 @@ class Empleado
 			stripslashes($this->isAdmin),
 			stripslashes($this->tipo)
 		);
-		$sql2 = sprintf("INSERT INTO tecnicos VALUES (%s,'%s','%s',%s);",
+		$sql2 = sprintf("CALL insertar_tecnico (%s,'%s','%s',%s);",
 			stripslashes($this->dni),
 			stripslashes($this->direccion),
 			stripslashes($this->telefono),
@@ -270,11 +267,7 @@ class Empleado
 
 	public function agregarControladorAereo($link)
     {
-		// si es una cadena: '%s'
-		// si no es una cadena: %s
-		// quitar url_imagen de la bd
-		$sql = sprintf("INSERT INTO empleado VALUES (%s, %s, '%s', '%s', '%s', %s, %s);",
-            stripslashes($this->dni),
+		$sql = sprintf("CALL insertar_empleado (%s, '%s', '%s', '%s', %s, %s);",
             stripslashes($this->afiliacion),
             stripslashes($this->nombre),
             stripslashes($this->username),
@@ -282,18 +275,36 @@ class Empleado
 			stripslashes($this->isAdmin),
 			stripslashes($this->tipo)
 		);
-		$sql2 = sprintf("INSERT INTO controlador_aereo VALUES (%s, '%s');",
-			stripslashes($this->dni),
-			stripslashes($this->fechaExamen)
+		// buscar la llave que acaba de ingresarse, utilizar esa para la siguiente consulta
+		$sql_info = "SELECT dni FROM empleado
+		WHERE afiliacion = '$this->afiliacion'
+		AND nombre = '$this->nombre'
+		AND username = '$this->username'
+		AND pass = '$this->pass'
+		AND isAdmin = $this->isAdmin
+		AND tipo = $this->tipo";
+
+		$resultado = $link->ejecutarInstruccion($sql_info);
+		if ($link->cantidadRegistros($resultado) > 0)
+        {
+			$fila = $link->obtenerFila($resultado);
+			$fila["dni"];
+        } else {
+			return 0;
+		}
+
+		$sql2 = sprintf("CALL insertar_controlador (%s, '%s');",
+			stripslashes($this->fechaExamen),
+			stripslashes($fila["dni"])
 		);
-		$bool1=$link->ejecutarInstruccion($sql);
-		$bool2=$link->ejecutarInstruccion($sql2);
-		if ($bool1&&$bool2) {
+		$bool1 = $link->ejecutarInstruccion($sql);
+		$bool2 = $link->ejecutarInstruccion($sql2);
+		if ($bool1 && $bool2) {
 			echo 'worked';
 		} else {
 			echo 'Didnt work';
 		}
-				
+		
 	}
 
 	public function modificarEstudiante($link)

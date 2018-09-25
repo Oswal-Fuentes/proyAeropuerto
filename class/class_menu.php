@@ -53,8 +53,6 @@ class Menu
         {
             if ($fila["isAdmin"]) {
                 echo "<li><a href='nuevo_empleado.php' class=\"menu-top-active\">Nuevo empleado</a></li>";
-                echo "<li><a href='nuevo_tecnico.php' class=\"menu-top-active\">Nuevo tecnico</a></li>";
-                echo "<li><a href='nuevo_controlador_aereo.php' class=\"menu-top-active\">Nuevo controlador aereo</a></li>";
                 echo "<li><a href='nuevo_avion.php' class=\"menu-top-active\">Nuevo avion</a></li>";
             } else {
                 echo "<li><a href='nueva_prueba.php' class=\"menu-top-active\">Nuevo prueba</a></li>";
@@ -85,10 +83,10 @@ class Menu
         }
     }
 
-    public static function generarSettings($url_imagen, $nombres, $apellidos)
+    public static function generarSettings($dni, $nombre)
     {
-        echo '<a class="media-left" href="#"><img src="'.$url_imagen.'" alt="" class="img-rounded" /></a><div class="media-body"><h4 class="media-heading">'.$nombres.' '.$apellidos.'</h4></div>';
+        echo "<div class='media-body'><h4 class='media-heading'><b>Nombre:</b> $nombre<br/><b>Dni:</b> $dni<br/></h4></div>";
     }
 }
-
+// CALL modificar_empleado (1, 2, "cano", "nozo", "123", 1);
 ?>

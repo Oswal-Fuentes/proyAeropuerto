@@ -35,11 +35,11 @@ switch ($_GET["accion"])
             $_POST["txt-sueldo-empleado"],
             0
         );
+
         echo $empleado->agregarTecnico($link);
         break;
 
     case 'agregarControladorAereo':
-        // yo creo que este no funciona:
         $llave_primaria = Empleado::obtenerLlavePrimaria($link);
         $empleado = new Empleado(
             $llave_primaria,
@@ -48,11 +48,14 @@ switch ($_GET["accion"])
             $_POST["txt-username-empleado"],
             $_POST["txt-clave-empleado"],
             0,
-            $_POST["txt-tipo-empleado"],
-            $_POST["txt-fechaExamen-empleado"],
-            0
+            0,
+            0,
+            0,
+            0,
+            $_POST["txt-fechaExamen-empleado"]
         );
-        echo $empleado->agregarTecnico($link);
+
+        echo $empleado->agregarControladorAereo($link);
         break;
 
     case 'generarTabla':
@@ -60,7 +63,6 @@ switch ($_GET["accion"])
         break;
 
     case 'eliminarEmpleado':
-        // este solo puede eliminar empleados no tecnicos ni controladores
         Empleado::eliminarEmpleado($link, $_POST["dni"]);
         break;
 

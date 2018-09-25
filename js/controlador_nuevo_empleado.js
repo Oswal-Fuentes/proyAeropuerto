@@ -159,7 +159,7 @@ $(document).ready(function()
         } else if ($("#slc-tipo-empleado").val() === '2' && verificarCampos(camposControlador) && verificarClave()) {
             var parametros = procesarParametros(camposControlador);
             $.ajax({
-                url: "../ajax/procesar_nuevo_empleado.php?accion=agregarTecnico",
+                url: "../ajax/procesar_nuevo_empleado.php?accion=agregarControladorAereo",
                 method: "POST",
                 data: parametros,
                 dataType: "html",
@@ -199,7 +199,6 @@ $(document).ready(function()
     });
 
     $("#btn-nuevo-empleado-editar").click(function() {
-        $("#form-fotografia")[0].reset();
         if(radioChecked())
         {
             var parametros = "dni=" + radioChecked();
@@ -212,7 +211,8 @@ $(document).ready(function()
                 success:function(objeto)
                 {
                     // $("#btn-modal").addClass("hidden");
-                    agregarDatos(objeto);
+                    console.log(objeto.dni);
+                    $("txt-dni-empleado").val(objeto.dni);
                 },
                 error: function(error) {
                     console.log(error);

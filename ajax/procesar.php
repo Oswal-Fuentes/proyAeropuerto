@@ -27,7 +27,7 @@ switch ($_GET['accion'])
 		break;
 
 	case 'generarSettings':
-		echo Menu::generarSettings($_SESSION['url_imagen'], $_SESSION['nombres'], $_SESSION['apellidos']);
+		echo Menu::generarSettings($_SESSION['dni'], $_SESSION['nombre']);
 		break;
 
 	default:
